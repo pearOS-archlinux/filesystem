@@ -15,7 +15,7 @@ backup=('etc/crypttab' 'etc/fstab' 'etc/group' 'etc/gshadow' 'etc/host.conf'
 source=('crypttab' 'env-generator' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts'
         'issue' 'ld.so.conf' 'locale.sh' 'nsswitch.conf' 'os-release'
         'passwd' 'profile' 'resolv.conf' 'securetty' 'shadow' 'shells' 'sysctl'
-        'sysusers' 'tmpfiles' 'archlinux-logo.svg' 'archlinux-logo.png'
+        'sysusers' 'tmpfiles' 'nicec0re-logo.png'
         'archlinux-logo-text.svg' 'archlinux-logo-text-dark.svg')
 md5sums=('5fa6674df7645d7f5895f2d12b4ef4e9'
          '2b0344e9639f35f3c0d5637a23556089'
@@ -124,7 +124,7 @@ package() {
   install -D -m755 "$srcdir"/env-generator usr/lib/systemd/system-environment-generators/10-arch
 
   # add logo
-  install -D -m644 "$srcdir"/archlinux-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
+  install -D -m644 "$srcdir"/nicec0re-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
 }
 
 # vim:set ts=2 sw=2 et:
