@@ -123,7 +123,8 @@ package() {
   install -D -m755 "$srcdir"/env-generator usr/lib/systemd/system-environment-generators/10-arch
 
   # add logo
-  install -D -m644 "$srcdir"/nicec0re-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
+  #install -D -m644 "$srcdir"/nicec0re-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
+  install -D -m644 "$srcdir"/nicec0re-logo.png usr/share/pixmaps
 }
 
 # vim:set ts=2 sw=2 et:
