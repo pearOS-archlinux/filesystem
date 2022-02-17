@@ -17,7 +17,7 @@ source=('crypttab' 'env-generator' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts'
         'passwd' 'profile' 'resolv.conf' 'securetty' 'shadow' 'shells' 'sysctl'
         'sysusers' 'tmpfiles' 'archlinux-logo.svg' 'archlinux-logo.png'
         'archlinux-logo-text.svg' 'archlinux-logo-text-dark.svg')
-sha256sums=('null')
+sha256sums=('SKIP')
 
 package() {
   cd "$pkgdir"
