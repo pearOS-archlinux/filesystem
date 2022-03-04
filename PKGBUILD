@@ -1,7 +1,7 @@
 # Maintainer: Alexandru Balan
 
 pkgname=filesystem
-pkgver=2022.02.17
+pkgver=2022.03.04
 pkgrel=2
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
@@ -28,7 +28,7 @@ md5sums=('5fa6674df7645d7f5895f2d12b4ef4e9'
          '5deb9f890a4d08a245e9752ede77271e'
          '580cf8b59eebfaac4fad373ffadc9912'
          'a3de66d416718325442f739d6c1d4e50'
-         'bf8d7dd2d5f89fd994e7b4de5b9c8fec'
+         '67a08f5dff7a48e273d4d2bcc5f46c26'
          '5182ac38a0de85da8ade93ef71975ca4'
          '448fe7cbcb566e8d318dc0db0c9cb710'
          '0ee015fad07732676d9488ae498eed41'
