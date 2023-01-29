@@ -1,6 +1,6 @@
 NAME="pearOS NiceC0re"
-VARIANT="Test Build Mar. 2022"
-VERSION="22.03"
+VARIANT="Test Build Jan. 2023"
+VERSION="23.01"
 PRETTY_NAME="pearOS NiceC0re"
 ID=arch
 BUILD_ID=rolling
@@ -11,4 +11,4 @@ SUPPORT_URL="https://discord.gg/QJPetvVhUb"
 BUG_REPORT_URL="https://bugs.pearos.xyz/"
 LOGO=nicec0re-logo
 IMAGE_ID=pearos-nicec0re
-IMAGE_VERSION=22.03
+IMAGE_VERSION=23.01
