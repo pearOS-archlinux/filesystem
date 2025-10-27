@@ -1,4 +1,4 @@
 build:
-	makepkg -sr --sign
+	makepkg --skipchecksums --skippgpcheck -sr --nosign
 clean:
-	rm -rf filesystem-2022.02.17-2-x86_64.pkg.tar.zst* pkg/ src/
+	rm -rf filesystem-* pkg/ src/
