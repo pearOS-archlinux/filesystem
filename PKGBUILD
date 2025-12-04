@@ -1,7 +1,7 @@
 # Maintainer: Alexandru Balan
 
 pkgname=filesystem
-pkgver=2025.10.20
+pkgver=2025.11.15
 pkgrel=3
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
