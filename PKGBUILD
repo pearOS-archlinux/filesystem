@@ -1,7 +1,7 @@
 # Maintainer: Alexandru Balan
 
 pkgname=filesystem
-pkgver=2025.12.18
+pkgver=2025.12.20
 pkgrel=3
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
@@ -57,7 +57,7 @@ package() {
   install -d -m555 -g 11 srv/ftp
 
   # setup /etc and /usr/share/factory/etc
-  install -d etc/{ld.so.conf.d,skel,profile.d} usr/share/factory/etc
+  install -d etc/{ld.so.conf.d,skel,profile.d,sddm.conf.d} usr/share/factory/etc
   for f in fstab group host.conf hosts issue ld.so.conf nsswitch.conf \
   passwd resolv.conf securetty shells profile; do
     install -m644 "$srcdir"/$f etc/
@@ -71,6 +71,10 @@ package() {
   touch etc/arch-release
   install -m644 "$srcdir"/locale.sh etc/profile.d/locale.sh
   install -Dm644 "$srcdir"/os-release usr/lib/os-release
+  
+  # install files from ./etc/
+  install -m644 "$startdir"/etc/sddm.conf etc/
+  install -Dm644 "$startdir"/etc/sddm.conf.d/kde_settings.conf etc/sddm.conf.d/kde_settings.conf
 
   # setup /var
   for d in cache local opt log/old lib/misc empty; do
