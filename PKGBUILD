@@ -2,7 +2,7 @@
 
 pkgname=filesystem
 pkgver=2026.07.01
-pkgrel=1
+pkgrel=2
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
 license=('GPL')
