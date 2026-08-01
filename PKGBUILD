@@ -129,6 +129,10 @@ package() {
   # add logo
   #install -D -m644 "$srcdir"/nicec0re-logo{.png,.svg,-text.svg,-text-dark.svg} usr/share/pixmaps
   install -D -m644 "$srcdir"/nicec0re-logo.png usr/share/pixmaps
+
+  # install extra keys
+  install -d -m755 usr/share/extras/keys
+  install -m644 "$startdir"/usr/share/extras/keys/* usr/share/extras/keys/
 }
 
 # vim:set ts=2 sw=2 et:
