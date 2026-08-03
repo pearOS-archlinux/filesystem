@@ -26,7 +26,7 @@ jobs:
           if [[ -z "$before" ]]; then
             candidates=$(find . -maxdepth 2 -name PKGBUILD -printf '%h\n' | sed 's#^\./##' | sort -u)
           else
-            candidates=$(git diff --name-only "$before" HEAD -- '*/PKGBUILD' | xargs -n1 dirname 2>/dev/null | sort -u)
+            candidates=$(git diff --name-only "$before" HEAD -- 'PKGBUILD' '*/PKGBUILD' | xargs -n1 dirname 2>/dev/null | sort -u)
           fi
 
           read_version() {
