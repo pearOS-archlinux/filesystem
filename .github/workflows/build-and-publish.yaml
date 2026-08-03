@@ -29,11 +29,11 @@ jobs:
             candidates=$(git diff --name-only "$before" HEAD -- 'PKGBUILD' '*/PKGBUILD' | xargs -n1 dirname 2>/dev/null | sort -u)
           fi
 
-          read_version() {
-            # $1 = PKGBUILD contents, echoes "pkgver-pkgrel"
+          read_field() {
+            # $1 = PKGBUILD contents, $2 = field name (pkgver/pkgrel/pkgname)
             ( set -e
-              eval "$(printf '%s\n' "$1" | grep -E '^\s*pkgver=|^\s*pkgrel=')"
-              printf '%s-%s' "$pkgver" "$pkgrel"
+              eval "$(printf '%s\n' "$1" | grep -E "^\s*$2=")"
+              printf '%s' "${!2}"
             )
           }
 
@@ -41,16 +41,21 @@ jobs:
           for dir in $candidates; do
             [[ -f "$dir/PKGBUILD" ]] || continue
             newcontents=$(cat "$dir/PKGBUILD")
-            newver=$(read_version "$newcontents") || { echo "Skip $dir: cannot parse new PKGBUILD" >&2; continue; }
+            newpkgver=$(read_field "$newcontents" pkgver) || { echo "Skip $dir: cannot parse new PKGBUILD" >&2; continue; }
+            newpkgrel=$(read_field "$newcontents" pkgrel) || { echo "Skip $dir: cannot parse new PKGBUILD" >&2; continue; }
+            pkgname=$(read_field "$newcontents" pkgname) || { echo "Skip $dir: cannot parse new PKGBUILD" >&2; continue; }
+            newver="$newpkgver-$newpkgrel"
 
             oldcontents=$(git show "$before:$dir/PKGBUILD" 2>/dev/null || true)
             if [[ -z "$oldcontents" ]]; then
               echo "New package dir: $dir ($newver)"
-              result+=("$dir")
+              result+=("$dir=$pkgname")
               continue
             fi
 
-            oldver=$(read_version "$oldcontents") || { echo "Skip $dir: cannot parse old PKGBUILD" >&2; continue; }
+            oldpkgver=$(read_field "$oldcontents" pkgver) || { echo "Skip $dir: cannot parse old PKGBUILD" >&2; continue; }
+            oldpkgrel=$(read_field "$oldcontents" pkgrel) || { echo "Skip $dir: cannot parse old PKGBUILD" >&2; continue; }
+            oldver="$oldpkgver-$oldpkgrel"
 
             if [[ "$newver" == "$oldver" ]]; then
               echo "Skip $dir: version unchanged ($newver)"
@@ -59,13 +64,16 @@ jobs:
 
             if dpkg --compare-versions "$newver" gt "$oldver"; then
               echo "Bumped: $dir ($oldver -> $newver)"
-              result+=("$dir")
+              result+=("$dir=$pkgname")
             else
               echo "Skip $dir: version did not increase ($oldver -> $newver)"
             fi
           done
 
-          json=$(printf '%s\n' "${result[@]}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          json=$(printf '%s\n' "${result[@]}" | jq -R -s -c '
+            split("\n") | map(select(length > 0)) |
+            map(split("=") | {dir: .[0], name: .[1]})
+          ')
           echo "Package dirs to build:"
           echo "$json"
           echo "dirs=$json" >> "$GITHUB_OUTPUT"
@@ -74,10 +82,11 @@ jobs:
     needs: detect-changes
     if: ${{ needs.detect-changes.outputs.dirs != '[]' }}
     runs-on: ubuntu-latest
+    name: build (${{ matrix.name }})
     strategy:
       fail-fast: false
       matrix:
-        pkgdir: ${{ fromJson(needs.detect-changes.outputs.dirs) }}
+        include: ${{ fromJson(needs.detect-changes.outputs.dirs) }}
 
     container:
       image: archlinux:latest
