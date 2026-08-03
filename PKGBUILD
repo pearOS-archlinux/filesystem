@@ -1,8 +1,8 @@
 # Maintainer: Alexandru Balan
 
 pkgname=filesystem
-pkgver=2026.07.01
-pkgrel=2
+pkgver=2026.08.01
+pkgrel=1
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
 license=('GPL')
@@ -13,34 +13,13 @@ backup=('etc/crypttab' 'etc/fstab' 'etc/group' 'etc/gshadow' 'etc/host.conf'
         'etc/passwd' 'etc/profile' 'etc/resolv.conf' 'etc/securetty'
         'etc/shadow' 'etc/shells')
 source=('crypttab' 'env-generator' 'fstab' 'group' 'gshadow' 'host.conf' 'hosts'
-        'issue' 'ld.so.conf' 'locale.sh' 'nsswitch.conf' 'os-release'
+        'issue' 'ld.so.conf' 'locale.sh' 'lsb-release' 'nsswitch.conf' 'os-release'
         'passwd' 'profile' 'resolv.conf' 'securetty' 'shadow' 'shells' 'sysctl'
         'sysusers' 'tmpfiles' 'nicec0re-logo.png'
         'archlinux-logo-text.svg' 'archlinux-logo-text-dark.svg')
-md5sums=('5fa6674df7645d7f5895f2d12b4ef4e9'
-         '2b0344e9639f35f3c0d5637a23556089'
-         'e33f6dfdd61978fcb3ddf1431286e05a'
-         '7fed1e1fb855e41a6d64d41f8521d69a'
-         '1c1e3b08acfa286f4b417c49de3e4366'
-         '7d119a9cce152aa182fb3392ddeecea7'
-         'a1315ea3e2b64d197b6efaf9c14ff778'
-         '5e2329a1b4e8e6896127c4b3bca88dec'
-         '5deb9f890a4d08a245e9752ede77271e'
-         '580cf8b59eebfaac4fad373ffadc9912'
-         'a3de66d416718325442f739d6c1d4e50'
-         '7134741b25b9040f0c318ca3789df920'
-         '5182ac38a0de85da8ade93ef71975ca4'
-         '448fe7cbcb566e8d318dc0db0c9cb710'
-         '0ee015fad07732676d9488ae498eed41'
-         'f04bcb2803afc4dcb95670fe87343b4d'
-         '815652599be54fd3607cf276e89a0a19'
-         'a78cd8d7f8240a8448edee82f503c34e'
-         'a51847c012555c843dbdf8df0da171d3'
-         'af7832eabaac9804c22f1f2b53816a49'
-         '3e6f8df6119067f600f8a055cbe51773'
-         '88c74316d7c351665ed6c437070d4c88'
-         '6642e6c6baf88c813aa3533152fc4aba'
-         '0897bf24867f7c6e8c68e5c183216c3d')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
+          'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
+          'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP')
 package() {
   cd "$pkgdir"
 
@@ -71,6 +50,7 @@ package() {
   touch etc/arch-release
   install -m644 "$srcdir"/locale.sh etc/profile.d/locale.sh
   install -Dm644 "$srcdir"/os-release usr/lib/os-release
+  install -m644 "$srcdir"/lsb-release etc/
   
   # install files from ./etc/
   install -m644 "$startdir"/etc/sddm.conf etc/
