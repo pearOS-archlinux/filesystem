@@ -130,15 +130,15 @@ jobs:
 
       - name: Build package
         run: |
-          cd "${{ matrix.pkgdir }}"
+          cd "${{ matrix.dir }}"
           sudo -u builduser makepkg -s --noconfirm --needed
 
       - name: Stage built package(s) outside the checkout
         run: |
           shopt -s nullglob
-          pkgs=("${{ matrix.pkgdir }}"/*.pkg.tar.zst)
+          pkgs=("${{ matrix.dir }}"/*.pkg.tar.zst)
           if (( ${#pkgs[@]} == 0 )); then
-            echo "No package produced in ${{ matrix.pkgdir }}, skipping." >&2
+            echo "No package produced in ${{ matrix.dir }}, skipping." >&2
             exit 1
           fi
           mkdir -p /tmp/built-pkgs
