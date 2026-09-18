@@ -1,7 +1,7 @@
 # Maintainer: Alexandru Balan
 
 pkgname=filesystem
-pkgver=2026.09.01
+pkgver=2026.09.18
 pkgrel=1
 pkgdesc='Base Arch Linux files'
 arch=('x86_64')
